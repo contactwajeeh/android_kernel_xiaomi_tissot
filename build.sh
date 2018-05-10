@@ -140,12 +140,10 @@ echo " ";
 echo " ";
 echo " ";
 mkdir outputdTissot
-mkdir outputdTissotStock
 
 mkdir ~/Moun_Kernel
 
-mkdir ~/Moun_Kernel/Moun_Kernel_V$KV-Tissot
-mkdir ~/Moun_Kernel/Moun_Kernel_V$KV-TissotStock
+mkdir /home/mountaser/Moun_Kernel/Moun_Kernel_V$KV-Tissot
 
 echo " Started Building the Kernels ! ";
 echo " ";
@@ -180,33 +178,7 @@ echo " ";
 echo " ";
 echo " ";
 make -C $(pwd) O=outputdTissot custom_tissot-perf_defconfig
-make -j32 -C $(pwd) O=outputdTissot
-
-##########################################
-
-echo " Started Building Tissot Stock! ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-echo " ";
-make -C $(pwd) O=outputdTissotStock tissot-perf_defconfig
-make -j32 -C $(pwd) O=outputdTissotStock
+make -j7 -C $(pwd) O=outputdTissot
 
 ##########################################
 
@@ -227,10 +199,8 @@ echo " ";
 
 
 cp outputdTissot/arch/arm64/boot/Image.gz-dtb ~/Moun_Kernel/Moun_Kernel_V$KV-Tissot/Image.gz-dtb
-cp outputdTissotStock/arch/arm64/boot/Image.gz-dtb ~/Moun_Kernel/Moun_Kernel_V$KV-TissotStock/Image.gz-dtb
 
 cp -r template/. ~/Moun_Kernel/Moun_Kernel_V$KV-Tissot
-cp -r template/. ~/Moun_Kernel/Moun_Kernel_V$KV-TissotStock
 
 echo " Zipping Kernel Files ";
 echo " ";
@@ -261,17 +231,12 @@ echo " ";
 echo " ";
 
 ##########################################
-cd ~/Moun_Kernel/Moun_Kernel_V$KV-Tissot
+cd /home/mountaser/Moun_Kernel/Moun_Kernel_V$KV-Tissot
 zip -r9 Moun_Kernel_V$KV-Tissot.zip * -x Moun_Kernel_V$KV-Tissot.zip
-
-cd ~/Moun_Kernel/Moun_Kernel_V$KV-TissotStock
-zip -r9 Moun_Kernel_V$KV-TissotStock.zip * -x Moun_Kernel_V$KV-TissotStock.zip
 
 
 echo " uploading to Mega "; 
-megamkdir /Root/Moun_Kernel_Tissot/V$KV
-megaput --path /Root/XDA/Moun_Kernel_Tissot/V$KV ~/Moun_Kernel/Moun_Kernel_V$KV-Tissot/Moun_Kernel_V$KV-Tissot.zip
-megaput --path /Root/XDA/Moun_Kernel_Tissot/V$KV ~/Moun_Kernel/Moun_Kernel_V$KV-TissotStock/Moun_Kernel_V$KV-TissotStock.zip
+megaput --path /Root/XDA/Moun_Kernel_Tissot/ ~/Moun_Kernel/Moun_Kernel_V$KV-Tissot/Moun_Kernel_V$KV-Tissot.zip
 
 echo " ";
 echo " ";
